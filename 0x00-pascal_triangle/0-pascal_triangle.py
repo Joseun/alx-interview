@@ -44,7 +44,6 @@ if __name__ == "__main__":
                 C = int(C * (line - i) / i)
             pascal_list.append(row_list)
         return(pascal_list)
-    return(pascal_list)  
+    return(pascal_list)
     Runs with error at n = 63
     """
-
