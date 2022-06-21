@@ -11,9 +11,6 @@ def canUnlockAll(boxes):
 
     """
     A = list(range(1, len(boxes)))
-    print(A)
     n = len(A)
-    print(n)
-    B = list(set([x for item in boxes for x in item]))
-    print(B)
+    B = list(set(x for item in boxes for x in item))
     return any(A == B[i:i + n] for i in range(len(B)-n + 1))
