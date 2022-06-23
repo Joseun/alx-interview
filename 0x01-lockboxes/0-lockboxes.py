@@ -10,7 +10,17 @@ def canUnlockAll(boxes):
         boxes: list of lists
 
     """
-    A = list(range(1, len(boxes)))
-    n = len(A)
-    B = list(set(x for item in boxes for x in item))
-    return any(A == B[i:i + n] for i in range(len(B)-n + 1))
+    keys_set = {0}
+    keys_set.update(boxes[0])
+    keys_in_hand = [] + boxes[0]
+
+    for key in keys_in_hand:
+        if key < len(boxes) and key >= 0:
+            keys_set.update(boxes[key])
+        new_keys = keys_set - set(keys_in_hand)
+        keys_in_hand += new_keys
+
+    useful_keys = [k for k in keys_set if k < len(boxes)]
+    if len(useful_keys) == len(boxes):
+        return True
+    return False
