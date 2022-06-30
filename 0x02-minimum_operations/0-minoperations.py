@@ -22,6 +22,7 @@ def minOperations(n: int) -> int:
 if __name__ == "__main__":
     minOperations()
 
+    # iteration method
     # count = 0
     # for i in range(2, n + 1):
     #     # check if problem can be broken into smaller problem
