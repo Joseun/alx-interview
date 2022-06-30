@@ -21,13 +21,3 @@ def minOperations(n: int) -> int:
 
 if __name__ == "__main__":
     minOperations()
-
-    # count = 0
-    # for i in range(2, n + 1):
-    #     # check if problem can be broken into smaller problem
-    #     while not n % i:
-    #         # if yes then add no of smaller problems to result.
-    #         count += i
-    #         # create smaller problem
-    #         n /= i
-    # return count
