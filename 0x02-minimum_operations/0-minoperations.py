@@ -32,3 +32,8 @@ if __name__ == "__main__":
     #         # create smaller problem
     #         n /= i
     # return count
+
+    # 1. We can find some largest number where n % k = 0.
+    # 2. Then find # of steps(copy+pastes) to reach k
+    # 3. Find number of pastes to reach n
+    # 4. answer = #2 + #3
