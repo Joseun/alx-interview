@@ -20,7 +20,3 @@ def minOperations(n: int) -> int:
             # create smaller problem
             n = n / i
     return count
-
-
-if __name__ == "__main__":
-    minOperations()
