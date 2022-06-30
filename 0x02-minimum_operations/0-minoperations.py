@@ -11,22 +11,18 @@ def minOperations(n: int) -> int:
     Argument:
     n: integer
     """
-    dp = [0]*(n+1)
-    if(n == 1): 
-        return 0
-    dp[1] = 0
-    if(n == 2):
-        return 2
-    dp[2] = 2
-    for i in range(3, n+1):
-        max_fact = 1 if(i%2!=0) else 2
-        if(max_fact!=2):
-            for j in range(3,n//2,2):
-                if(i%j==0):
-                    max_fact = j
-                    break
-        dp[i] = dp[i//max_fact]+max_fact if max_fact!=1 else i
-    return dp[n]
+    ans=0
+    def dfs(ch,ops,lastcopy):
+        nonlocal ans
+        if len(ch)==n:
+            ans=ops
+            return True
+        elif len(ch)>n:
+            return False
+        return dfs(ch+ch,ops+2,ch) or dfs(ch+lastcopy,ops+1,lastcopy)
+    dfs('H',0,'')
+    return ans
+    
     # count = 0
     # for i in range(2, n + 1):
     #     # check if problem can be broken into smaller problem
