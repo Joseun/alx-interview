@@ -16,7 +16,7 @@ def minOperations(n: int) -> int:
     if n <= 5:
         return n
     for i in range(n//2, -1, -1):
-        if n % i == 0: 
+        if n % i == 0:
             return minOperations(i) + (n // i)
 
     # count = 0
