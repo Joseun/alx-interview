@@ -19,6 +19,9 @@ def minOperations(n: int) -> int:
         if n % i == 0:
             return minOperations(i) + (n // i)
 
+if __name__ == "__main__":
+    minOperations()
+
     # count = 0
     # for i in range(2, n + 1):
     #     # check if problem can be broken into smaller problem
