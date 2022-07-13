@@ -24,27 +24,27 @@ url_regex = "\"GET /projects/260 HTTP/1.1\" "
 err_regex = "\b([2][0][0]|[3][0][1]|[4][0][0]|[4][0][1]|[4][0][3]|\
              [4][0][4]|[4][0][5]|[5][0][0])\b "
 size_regex = "\b([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1][0][0-2][0-4])\b"
-line_regex = re.compile(r''.format(ip_re + datetime_regex +
-                        url_regex + err_regex + size_regex))
+line_regex = re.compile(r' '.format(ip_re, datetime_regex,
+                        url_regex, err_regex, size_regex))
 try:
     i = 0
     for line in sys.stdin:
-        is_valid = line_regex.match(line)
-        if is_valid:
+        is_valid = line_regex.search(line)
+        # print(is_valid)
+        if is_valid is not None:
             i += 1
             stats = line.split(' ')
             # print(stats, len(stats))
-            if len(stats) == 9:
-                filesize += int(stats[-1])
-                if error_count.get(stats[-2]):
-                    error_count[stats[-2]] += 1
-                else:
-                    error_count[stats[-2]] = 1
-                if (i % 10 == 0):
-                    print('File size: {}'.format(filesize))
-                    for err in errors:
-                        if error_count.get(err):
-                            print('{}: {}'.format(err, error_count.get(err)))
+            filesize += int(stats[-1])
+            if error_count.get(stats[-2]):
+                error_count[stats[-2]] += 1
+            else:
+                error_count[stats[-2]] = 1
+            if (i % 10 == 0):
+                print('File size: {}'.format(filesize))
+                for err in errors:
+                    if error_count.get(err):
+                        print('{}: {}'.format(err, error_count.get(err)))
 except KeyboardInterrupt:
     print('File size: {}'.format(filesize))
     for err in errors:
