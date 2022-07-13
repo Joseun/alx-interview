@@ -29,20 +29,22 @@ line_regex = re.compile(r''.format(ip_re + datetime_regex +
 try:
     i = 0
     for line in sys.stdin:
-        is_valid = line_regex.search(line)
+        is_valid = line_regex.match(line)
         if is_valid:
             i += 1
             stats = line.split(' ')
-            filesize += int(stats[-1])
-            if error_count.get(stats[-2]):
-                error_count[stats[-2]] += 1
-            else:
-                error_count[stats[-2]] = 1
-            if (i % 10 == 0):
-                print('File size: {}'.format(filesize))
-                for err in errors:
-                    if error_count.get(err):
-                        print('{}: {}'.format(err, error_count.get(err)))
+            # print(stats, len(stats))
+            if len(stats) == 9:
+                filesize += int(stats[-1])
+                if error_count.get(stats[-2]):
+                    error_count[stats[-2]] += 1
+                else:
+                    error_count[stats[-2]] = 1
+                if (i % 10 == 0):
+                    print('File size: {}'.format(filesize))
+                    for err in errors:
+                        if error_count.get(err):
+                            print('{}: {}'.format(err, error_count.get(err)))
 except KeyboardInterrupt:
     print('File size: {}'.format(filesize))
     for err in errors:
