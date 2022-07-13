@@ -26,12 +26,13 @@ err_regex = "\b([2][0][0]|[3][0][1]|[4][0][0]|[4][0][1]|[4][0][3]|\
 size_regex = "\b([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1][0][0-2][0-4])\b"
 line_regex = re.compile(r' '.format(ip_re, datetime_regex,
                         url_regex, err_regex, size_regex))
+# adjusted the regex, '' and ' ' are different and '' was giving the error
 try:
     i = 0
     for line in sys.stdin:
         is_valid = line_regex.search(line)
         # print(is_valid)
-        if is_valid is not None:
+        if is_valid:
             i += 1
             stats = line.split(' ')
             # print(stats, len(stats))
