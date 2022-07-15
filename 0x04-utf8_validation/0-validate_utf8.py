@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """ UTF-8 encoding validator """
-from typing import List
 
 
-def validUTF8(data: List[int]):
+def validUTF8(data):
     """
     determines if a given data set represents a valid UTF-8 encoding
 
