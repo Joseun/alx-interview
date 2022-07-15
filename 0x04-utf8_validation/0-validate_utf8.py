@@ -13,22 +13,34 @@ def validUTF8(data: List[int]):
     count = 0
 
     for bit in data:
-        bin_data = bin(bit).replace('0b', '').rjust(8, '0')[-8:]
-        if count == 0:
-            if bin_data.startswith('110'):
-                count = 1
-            if bin_data.startswith('1110'):
-                count = 2
-            if bin_data.startswith('11110'):
-                count = 3
-            if bin_data.startswith('10'):
+        # Array element must be an integer
+        if not isinstance(bit, int):
+            return False
+        # When integer is not in the range of valid integers
+        if bit < -255 or bit >= 255:
+            return False
+        # Convert each integer to its binary format
+        bin_num = format(bit, "b").zfill(8)
+        if bin_num[0] == '1' and bin_num[1] == '0':
+            return False
+        # Get the first leading 1's
+        byte_len = (bin_num.split('0', 1))[0]
+        if byte_len:
+            # Getting the length of the total bytes for the character
+            byte_len = len(byte_len)
+            if byte_len > 4:
                 return False
+            # If we have a length of byte beyond the length of the array
+            if count + byte_len > len(data):
+                return False
+            # Getting the bytes/integers from the data array
+            next_array = data[count + 1: byte_len + count]
+            # Iterate through the new array representing the character
+            for j in next_array:
+                ch_bin = format(j, "b").zfill(8)
+                if ch_bin[0] != "1" or ch_bin[1] != "0":
+                    return False
+            count += byte_len
         else:
-            if not bin_data.startswith('10'):
-                return False
-            count -= 1
-
-    if count != 0:
-        return False
-
+            count += 1
     return True
