@@ -3,18 +3,18 @@
 
 const request = require('request');
 
-function printCharacters (index, arr) {
+function printCharacters (index, characterList) {
   /* Print all the characters from the api */
-  if (index === arr.length) {
+  if (index === characterList.length) {
     return;
   }
-  request((arr[index]), (error, response, body) => {
+  request((characterList[index]), (error, response, body) => {
     if (error) {
       console.log(error);
     }
     const character = JSON.parse(body);
     console.log(character.name);
-    printCharacters(index + 1, arr);
+    printCharacters(index + 1, characterList);
   });
 }
 
