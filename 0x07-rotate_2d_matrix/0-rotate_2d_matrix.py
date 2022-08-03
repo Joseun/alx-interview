@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """ Rotation of a 2D matrix """
-from typing import List
 
-def rotate_2d_matrix(matrix: List[List[int]]):
+
+def rotate_2d_matrix(matrix):
     """
     Rotates a n x n 2D matrix 90 degrees clockwise
 
