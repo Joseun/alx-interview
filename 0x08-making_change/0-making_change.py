@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 """ Module to calculate change. """
-from typing import List
 
 
-def makeChange(coins: List[int], total: int) -> int:
+def makeChange(coins, total):
     """
-    Determines the fewest number of coins needed 
+    Determines the fewest number of coins needed
     to meet a given amount total
 
     Arguments:
