@@ -13,22 +13,21 @@ def island_perimeter(grid):
     """
     n_rows = len(grid)
     n_cols = len(grid[0])
-    row = 1
+    grid = [[0]*n_cols] + grid + [[0]*n_cols] # add rows of only zeros at top and bottom of grid 
+    for i in range(n_rows + 2): 
+            grid[i] = [0] + grid[i] + [0] # add cols of only zeros at left and right of grid  
     sides_count = []
-    for row in range(n_rows):
-        for col in range(n_cols):
+    for row in range(n_rows + 1):
+        for col in range(n_cols + 1):
             if grid[row][col] == 1:
-                try:
-                    up = grid[row - 1][col]
-                    down = grid[row + 1][col]
-                    left = grid[row][col - 1]
-                    right = grid[row][col + 1]
-                    total = up + down + left + right
-                    if total == 0:
-                        return
-                    sides_count.append(4 - total)
-                except IndexError:
+                up = grid[row - 1][col]
+                down = grid[row + 1][col]
+                left = grid[row][col - 1]
+                right = grid[row][col + 1]
+                total = up + down + left + right
+                if total == 0:
                     return
+                sides_count.append(4 - total)
     perimeter = sum(sides_count)
     return perimeter
 
