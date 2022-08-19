@@ -6,8 +6,8 @@ def island_perimeter(grid):
     """
     A function that returns the perimeter of the island
 
-    Args:
-        grid: list of list of integers
+    Argument:
+    grid: list of list of integers
 
     Returns: integer
     """
@@ -15,7 +15,6 @@ def island_perimeter(grid):
     n_cols = len(grid[0])
     row = 1
     sides_count = []
-    multiple_islands = []
     while row <= n_rows - 2:
         for col in range(1, n_cols - 2):
             if grid[row][col] == 1:
@@ -28,9 +27,8 @@ def island_perimeter(grid):
                     multiple_islands.append(1)
                 sides_count.append(4 - total)
         row += 1
-    if len(multiple_islands) > 1:
-        print(f" Error!! There are {len(multiple_islands)} island(s).")
-        return
-    else:
-        perimeter = sum(sides_count)
-        return perimeter
+    perimeter = sum(sides_count)
+    return perimeter
+
+if __name__ == '__main__':
+    island_perimeter(grid)
