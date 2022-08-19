@@ -18,8 +18,8 @@ def island_perimeter(grid):
     # add cols of only zeros at left and right of grid
     for i in range(n_rows + 2):
             grid[i] = [0] + grid[i] + [0]
-    sides_count = []
-    islands = 1
+    perimeter = 0
+    islands = 0
     for row in range(n_rows + 1):
         for col in range(n_cols + 1):
             if grid[row][col] == 1:
@@ -30,10 +30,11 @@ def island_perimeter(grid):
                 total = up + down + left + right
                 if total == 0:
                     islands += 1
-                sides_count.append(4 - total)
+                    perimeter += 4 - total
+                else:
+                    perimeter += 4 - total
     if islands > 1:
         return
-    perimeter = sum(sides_count)
     return perimeter
 
 if __name__ == '__main__':
